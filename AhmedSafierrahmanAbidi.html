@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Safierrahman Abidi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --black-2: #111111;
+    --black-3: #1a1a1a;
+    --yellow: #f5c518;
+    --yellow-dim: #c9a114;
+    --yellow-faint: rgba(245, 197, 24, 0.07);
+    --white: #e8e8e8;
+    --grey: #555;
+    --grey-light: #888;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s;
+    mix-blend-mode: difference;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(245, 197, 24, 0.4);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 0;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,197,24,0.08);
+  }
+
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--yellow);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--grey-light);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--yellow); }
+
+  .hero {
+    padding: 160px 0 100px;
+    border-bottom: 1px solid rgba(245,197,24,0.08);
+  }
+
+  .hero-prompt {
+    font-size: 11px;
+    color: var(--yellow);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-prompt::before { content: '> '; opacity: 0.5; }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s forwards;
+  }
+
+  .hero h1 span { color: var(--yellow); }
+
+  .hero-title {
+    font-size: 12px;
+    color: var(--grey-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+
+  .hero-bio {
+    max-width: 540px;
+    color: var(--grey-light);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s forwards;
+  }
+
+  .hero-bio strong { color: var(--white); font-weight: 500; }
+
+  .hero-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid;
+    transition: all 0.2s;
+    cursor: none;
+  }
+
+  .btn-primary { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+  .btn-primary:hover { background: transparent; color: var(--yellow); }
+  .btn-secondary { background: transparent; color: var(--grey-light); border-color: rgba(255,255,255,0.1); }
+  .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--grey-light);
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.95s forwards;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(245,197,24,0.06);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(245,197,24,0.15);
+  }
+
+  .mirror-card {
+    background: var(--yellow-faint);
+    border: 1px solid rgba(245,197,24,0.2);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .mirror-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--yellow);
+  }
+
+  .mirror-card:hover { border-color: rgba(245,197,24,0.5); }
+
+  .mirror-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--yellow);
+    padding: 3px 8px;
+    margin-bottom: 16px;
+  }
+
+  .mirror-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .mirror-card p {
+    color: var(--grey-light);
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 24px;
+  }
+
+  .mirror-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .mirror-stat { display: flex; flex-direction: column; gap: 2px; }
+
+  .mirror-stat-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .mirror-stat-value { font-size: 13px; color: var(--yellow); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .project-card {
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    background: var(--black-2);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--yellow);
+    transition: width 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(245,197,24,0.2); background: var(--black-3); }
+  .project-card:hover::after { width: 100%; }
+
+  .project-number {
+    font-size: 10px;
+    color: var(--yellow);
+    opacity: 0.6;
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .project-card p {
+    font-size: 12px;
+    color: var(--grey-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--grey-light);
+  }
+
+  .tag-yellow { border-color: rgba(245,197,24,0.25); color: var(--yellow-dim); }
+
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-date { font-size: 11px; color: var(--grey); padding-top: 2px; letter-spacing: 0.05em; }
+
+  .exp-content h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .exp-org { font-size: 11px; color: var(--yellow-dim); margin-bottom: 12px; letter-spacing: 0.05em; }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--grey-light);
+    line-height: 1.7;
+  }
+
+  .exp-bullets li { display: flex; gap: 10px; align-items: flex-start; }
+
+  .exp-bullets li::before {
+    content: '//';
+    color: var(--yellow);
+    opacity: 0.4;
+    font-size: 10px;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .skill-group h4 {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(245,197,24,0.15);
+  }
+
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .skill-list li {
+    font-size: 12px;
+    color: var(--grey-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li::before { content: '/'; color: var(--yellow); opacity: 0.4; font-size: 10px; }
+
+  .edu-list { display: flex; flex-direction: column; }
+
+  .edu-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .edu-item:last-child { border-bottom: none; }
+
+  .edu-date { font-size: 11px; color: var(--grey); padding-top: 2px; }
+
+  .edu-content h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .edu-degree { font-size: 11px; color: var(--yellow-dim); margin-bottom: 6px; }
+  .edu-note { font-size: 11px; color: var(--grey); line-height: 1.7; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-text h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .contact-text p {
+    font-size: 12px;
+    color: var(--grey-light);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .contact-links { display: flex; flex-direction: column; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--grey-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .contact-link:hover { color: var(--yellow); }
+
+  .contact-link-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    min-width: 72px;
+  }
+
+  .terminal {
+    background: var(--black-2);
+    border: 1px solid rgba(245,197,24,0.12);
+    padding: 24px;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .terminal-line { display: flex; gap: 8px; }
+  .terminal-prompt { color: var(--yellow); user-select: none; }
+  .terminal-cmd { color: var(--white); }
+  .terminal-out { color: var(--grey-light); padding-left: 16px; }
+
+  .terminal-cursor {
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: var(--yellow);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  footer {
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--grey);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: rgba(245,197,24,0.3); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--yellow); }
+  ::selection { background: var(--yellow); color: var(--black); }
+
+  .eyes-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .eye {
+    position: absolute;
+    opacity: 0.08;
+    animation: eyeFloat 8s ease-in-out infinite;
+  }
+
+  .eye svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes eyeFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+
+  @keyframes eyeBlink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+
+  .eye-pupil {
+    animation: eyeBlink 4s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .project-card {
+    position: relative;
+  }
+
+  .project-card .card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .repo-link:hover { color: var(--yellow); }
+
+  .repo-arrow {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 6px; }
+    .edu-item { grid-template-columns: 1fr; gap: 6px; }
+    nav .nav-links { display: none; }
+    .mirror-card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="eyes-bg" id="eyesBg"></div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="container">
+    <a href="#" class="nav-logo">ASA.</a>
+    <ul class="nav-links">
+      <li><a href="#mirror">Mirror</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="Safi_s_Resume.pdf" target="_blank" rel="noopener">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-prompt">init portfolio.v1</div>
+    <h1>Ahmed<br><span>Safierrahman</span><br>Abidi.</h1>
+    <div class="hero-title">Computer Engineer · Grand Tunis, Tunisia</div>
+    <p class="hero-bio">
+      Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company), and formerly Lead Designer at <strong>Kilanos Studio</strong>. I run a <strong>public Arch Linux mirror</strong> and have shipped games to itch.io. I build things that talk to each other.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:bassasafi@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="#projects" class="btn btn-secondary">View work</a>
+    </div>
+    <div class="status">
+      <span class="status-dot"></span>
+      Open to opportunities · Based in Tunis
+    </div>
+  </div>
+</section>
+
+<!-- MIRROR -->
+<section id="mirror">
+  <div class="container">
+    <div class="section-label reveal">01 / Infrastructure</div>
+    <div class="mirror-card reveal">
+      <div class="mirror-badge">Featured Project</div>
+      <h3>Arch Linux Mirror</h3>
+      <p>
+        A fully automated, publicly accessible Arch Linux package mirror designed, deployed, and maintained from Tunisia. Built with rsync, systemd services, and timers for reliable scheduled synchronization with upstream mirrors. Handles DNS configuration, reverse proxy readiness, and port forwarding. Every constraint, issue, and fix is documented on Git.
+      </p>
+      <div class="mirror-meta">
+        <div class="mirror-stat">
+          <span class="mirror-stat-label">Stack</span>
+          <span class="mirror-stat-value">rsync / systemd / NGINX</span>
+        </div>
+        <div class="mirror-stat">
+          <span class="mirror-stat-label">Automation</span>
+          <span class="mirror-stat-value">Full</span>
+        </div>
+        <div class="mirror-stat">
+          <span class="mirror-stat-label">Since</span>
+          <span class="mirror-stat-value">Dec 2025</span>
+        </div>
+        <div class="mirror-stat">
+          <span class="mirror-stat-label">Status</span>
+          <span class="mirror-stat-value" style="color: #22c55e;">Active</span>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="tag tag-yellow">Arch Linux</span>
+        <span class="tag tag-yellow">systemd</span>
+        <span class="tag tag-yellow">NGINX</span>
+        <span class="tag tag-yellow">DNS</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Git</span>
+        <span class="tag">Open Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">02 / Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-number">01 / EMBEDDED</div>
+        <h3>Aquarium Management System</h3>
+        <p>PIC16F877-based embedded system monitoring temperature, water level, and lighting. Drives actuators to hold stable conditions with manual override, real-time status display, and safety alarms via internal and external interrupts. Thresholds persist across power cycles via EEPROM.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">C</span>
+          <span class="tag tag-yellow">PIC16F877</span>
+          <span class="tag tag-yellow">PCB Design</span>
+          <span class="tag">MikroC</span>
+          <span class="tag">EEPROM</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/PIC16F877-Aquarium-Sensors" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">02 / WEB</div>
+        <h3>Disco Mind</h3>
+        <p>A locally-running AI application where the 24 psychological skill voices from Disco Elysium respond to your thoughts in real time. Built on Ollama, Piper TTS (migrating to XTTS v2 with cloned voices), and a single HTML file. No cloud. No API costs. No data leaving your machine.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">Python</span>
+          <span class="tag tag-yellow">Ollama</span>
+          <span class="tag tag-yellow">Docker</span>
+          <span class="tag">TTS</span>
+          <span class="tag">AI</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/Disco-Mind" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">03 / GAME</div>
+        <h3>Lethal Prescription</h3>
+        <p>2D platformer built in C on Debian Linux. Time-based game loop with input handling, update, and render steps for responsive gameplay. Ported to Windows and published on itch.io.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">C</span>
+          <span class="tag tag-yellow">GNU/Linux</span>
+          <span class="tag">Debian</span>
+          <span class="tag">itch.io</span>
+        </div>
+        <a href="https://lethalprescryption.itch.io" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">04 / WEB</div>
+        <h3>Starr</h3>
+        <p>Full-stack educational web platform for quizzes, messaging, and safe interaction for children. Built with a team of 6. Features include a points and badges reward system, role-based access, and content moderation tools.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">PHP</span>
+          <span class="tag tag-yellow">MySQL</span>
+          <span class="tag tag-yellow">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">XAMPP</span>
+          <span class="tag">Git</span>
+        </div>
+        <a href="https://github.com/TG-o2/Starr" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">05 / WEB</div>
+        <h3>Smart Research</h3>
+        <p>Publication management system for academic research. A platform to organize, track, and manage academic publications and citations. Currently in development.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">C</span>
+          <span class="tag tag-yellow">C++</span>
+          <span class="tag tag-yellow">MySQL</span>
+          <span class="tag">QT</span>
+          <span class="tag">In Progress</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/Smart-research-publication-management" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">06 / INFRA</div>
+        <h3>Arch Linux Mirror</h3>
+        <p>Public Arch Linux package mirror for Tunisia. Built with rsync, systemd services, and timers for reliable synchronization with upstream mirrors.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">Arch Linux</span>
+          <span class="tag tag-yellow">rsync</span>
+          <span class="tag tag-yellow">systemd</span>
+          <span class="tag">NGINX</span>
+          <span class="tag">DNS</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/Arch_Mirror_Tunisia" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">07 / CREATIVE</div>
+        <h3>Waves</h3>
+        <p>An ongoing autobiographical project. A jumble of dysfunctional thoughts rendered in writing and video. The long game. Not yet public.</p>
+        <div class="project-tags">
+          <span class="tag">Writing</span>
+          <span class="tag">Video Editing</span>
+          <span class="tag">In Progress</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">03 / Experience</div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-date">Jul 2025 – Sep 2025</div>
+        <div class="exp-content">
+          <h3>Software Engineer Intern</h3>
+          <div class="exp-org">STEG / Societe Tunisienne de l'Electricite et du Gaz · Ben Arous, Tunisia</div>
+          <ul class="exp-bullets">
+            <li>Supported IT systems used to monitor and operate power distribution, contributing to high-availability expectations in critical public infrastructure.</li>
+            <li>Assisted with server operations and system administration tasks including service checks, log review, access basics, and operational documentation to improve reliability and troubleshooting speed.</li>
+            <li>Gained hands-on exposure to networking architecture for grid monitoring and control, focusing on redundancy and segmentation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-date">Dec 2022 – Jan 2024</div>
+        <div class="exp-content">
+          <h3>Lead Designer (Former)</h3>
+          <div class="exp-org">Kilanos Studio · Remote, Finland</div>
+          <ul class="exp-bullets">
+            <li>Led visual design for multiple game projects, managing end-to-end delivery of UI and visual assets while keeping design consistent with project goals.</li>
+            <li>Collaborated across teams to resolve design issues during development, translating game mechanics and direction into shippable art and interface deliverables.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">04 / Education</div>
+    <div class="edu-list">
+
+      <div class="edu-item reveal">
+        <div class="edu-date">Sep 2024 – Jun 2029</div>
+        <div class="edu-content">
+          <h3>ESPRIT School of Engineering</h3>
+          <div class="edu-degree">Computer Engineering · EUR-ACE Accredited · Grand Tunis, Tunisia</div>
+          <div class="edu-note">5-year integrated engineering diploma (Grade Master). Coursework includes AI/ML, embedded systems, IoT, networking, full-stack web, C/C++, algorithms, Linux systems, linear algebra, and statistics.</div>
+        </div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-date">Sep 2021 – Jun 2024</div>
+        <div class="edu-content">
+          <h3>SAMIS High School</h3>
+          <div class="edu-degree">High School Diploma</div>
+          <div class="edu-note">GPA: 4.0 · Grade: 99.07/100</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">05 / Skills</div>
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <h4>Programming</h4>
+        <ul class="skill-list">
+          <li>C / C++</li>
+          <li>PHP</li>
+          <li>JavaScript</li>
+          <li>HTML / CSS</li>
+          <li>SQL</li>
+          <li>Bash</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Embedded</h4>
+        <ul class="skill-list">
+          <li>PCB Design</li>
+          <li>MikroC</li>
+          <li>MPLAB</li>
+          <li>PIC microcontrollers</li>
+          <li>Interrupt systems</li>
+          <li>EEPROM</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Systems / IT</h4>
+        <ul class="skill-list">
+          <li>Arch Linux / Hyprland</li>
+          <li>Debian / Ubuntu</li>
+          <li>Server operations</li>
+          <li>System administration</li>
+          <li>Network architecture</li>
+          <li>High availability</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Infrastructure</h4>
+        <ul class="skill-list">
+          <li>rsync</li>
+          <li>systemd services</li>
+          <li>NGINX</li>
+          <li>DNS configuration</li>
+          <li>Reverse proxy</li>
+          <li>Git</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Design</h4>
+        <ul class="skill-list">
+          <li>Adobe Photoshop</li>
+          <li>Adobe Premiere</li>
+          <li>Krita</li>
+          <li>Aseprite</li>
+          <li>Paint Tool SAI 2</li>
+          <li>Filmora X</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Languages</h4>
+        <ul class="skill-list">
+          <li>English (C2)</li>
+          <li>Arabic (C2)</li>
+          <li>French (B2)</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <h4>Currently Exploring</h4>
+        <ul class="skill-list">
+          <li>Docker</li>
+          <li>Kubernetes</li>
+          <li>Ansible</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+<section>
+  <div class="container reveal">
+    <div class="terminal">
+      <div class="terminal-line">
+        <span class="terminal-prompt">safi@arch ~$</span>
+        <span class="terminal-cmd">whoami</span>
+      </div>
+      <div class="terminal-out">Ahmed Safierrahman Abidi / Computer Engineer / Tunis, Tunisia</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">safi@arch ~$</span>
+        <span class="terminal-cmd">uname -a</span>
+      </div>
+      <div class="terminal-out">Arch Linux x86_64 / Hyprland / daily driver</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">safi@arch ~$</span>
+        <span class="terminal-cmd">cat interests.txt</span>
+      </div>
+      <div class="terminal-out">linux infrastructure, devops, embedded systems, game development, creative writing</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">safi@arch ~$</span>
+        <span class="terminal-cmd">cat goals.txt</span>
+      </div>
+      <div class="terminal-out">build things that matter, get to finland, make waves</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">safi@arch ~$</span>
+        <span class="terminal-cmd"><span class="terminal-cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">06 / Contact</div>
+    <div class="contact-grid">
+      <div class="contact-text reveal">
+        <h2>Let's talk.</h2>
+        <p>Open to internship opportunities, engineering roles, and collaborations. Based in Tunis and available remotely or for relocation.</p>
+        <a href="mailto:bassasafi@gmail.com" class="btn btn-primary">Send an email</a>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:bassasafi@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          bassasafi@gmail.com
+        </a>
+        <a href="https://github.com/Confused-Guy" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-label">GitHub</span>
+          github.com/Confused-Guy
+        </a>
+        <a href="https://www.linkedin.com/in/ahmed-safierrahman-abidi-388571265/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-label">LinkedIn</span>
+          ahmed-safierrahman-abidi
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <footer>
+    <span>2026 / Ahmed Safierrahman Abidi</span>
+    <span>Grand Tunis, Tunisia</span>
+  </footer>
+</div>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1.8)';
+      cursorRing.style.borderColor = 'rgba(245,197,24,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorRing.style.borderColor = 'rgba(245,197,24,0.4)';
+    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.children);
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), 60 * idx);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  const eyesBg = document.getElementById('eyesBg');
+  const eyeCount = 40;
+  const placedEyes = [];
+  const minGap = 25;
+
+  for (let i = 0; i < eyeCount; i++) {
+    const eye = document.createElement('div');
+    eye.className = 'eye';
+    const size = 50 + Math.random() * 60;
+
+    let x, y, attempts = 0;
+    do {
+      x = Math.random() * 90;
+      y = Math.random() * 90;
+      attempts++;
+    } while (placedEyes.some(e => Math.hypot(e.x - x, e.y - y) < minGap) && attempts < 50);
+
+    if (attempts >= 50) continue;
+
+    placedEyes.push({ x, y, size });
+
+    eye.style.cssText = `
+      width: ${size}px;
+      height: ${size * 0.5}px;
+      left: ${x}%;
+      top: ${y}%;
+      animation-delay: ${Math.random() * 8}s;
+      animation-duration: ${6 + Math.random() * 4}s;
+    `;
+
+    const shade = Math.floor(180 + Math.random() * 50);
+    const color = `rgb(${shade}, ${shade}, ${shade})`;
+    const pupilColor = `rgb(${shade - 80}, ${shade - 80}, ${shade - 60})`;
+
+    eye.innerHTML = `
+      <svg viewBox="0 0 100 50" fill="none">
+        <path d="M5 25 Q30 5, 50 5 Q70 5, 95 25 Q70 45, 50 45 Q30 45, 5 25Z" fill="${color}" stroke="${pupilColor}" stroke-width="1.5"/>
+        <circle cx="50" cy="25" r="14" fill="${pupilColor}" class="eye-pupil"/>
+        <circle cx="50" cy="25" r="6" fill="${color}"/>
+      </svg>
+    `;
+    eyesBg.appendChild(eye);
+  }
+</script>
+
+</body>
+</html>
