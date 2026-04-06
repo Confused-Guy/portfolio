@@ -692,7 +692,7 @@
       Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company), and formerly Lead Designer at <strong>Kilanos Studio</strong>. I run a <strong>public Arch Linux mirror</strong> and have shipped games to itch.io. I build things that talk to each other.
     </p>
     <div class="hero-links">
-      <a href="/cdn-cgi/l/email-protection#8be9eaf8f8eaf8eaede2cbece6eae2e7a5e8e4e6" class="btn btn-primary">Get in touch</a>
+      <a href="mailto:bassasafi@gmail.com" class="btn btn-primary">Get in touch</a>
       <a href="#projects" class="btn btn-secondary">View work</a>
     </div>
     <div class="status">
@@ -819,7 +819,19 @@
         <a href="https://github.com/Confused-Guy/Smart-research-publication-management" target="_blank" rel="noopener" class="card-link"></a>
       </div>
 
-
+      <div class="project-card reveal">
+        <div class="project-number">06 / INFRA</div>
+        <h3>Arch Linux Mirror</h3>
+        <p>Public Arch Linux package mirror for Tunisia. Built with rsync, systemd services, and timers for reliable synchronization with upstream mirrors.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">Arch Linux</span>
+          <span class="tag tag-yellow">rsync</span>
+          <span class="tag tag-yellow">systemd</span>
+          <span class="tag">NGINX</span>
+          <span class="tag">DNS</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/Arch_Mirror_Tunisia" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
 
       <div class="project-card reveal">
         <div class="project-number">07 / CREATIVE</div>
@@ -848,15 +860,24 @@
           <h3>Software Engineer Intern</h3>
           <div class="exp-org">STEG, National Electricity Government Agency</div>
           <ul class="exp-bullets">
-            <li>Observed and documented the SCADA architecture used to supervise Tunisia's national power grid, including RTU data acquisition, IEC 60870-5 protocol framing, and real-time database management at the dispatching centre.</li>
-            <li>Studied Automatic Generation Control (AGC) logic and frequency regulation mechanisms, including how the 50 Hz grid frequency is maintained within a ±0.2 Hz band through automated correction signals to generating units.</li>
-            <li>Examined redundancy and failover design across the SCADA stack: hot-standby server pairs, dual geographic dispatching centres, and RTU backup communication paths via OPGW fibre and microwave links.</li>
-            <li>Reviewed IT infrastructure in a critical industrial environment, including the coexistence of Red Hat Linux and legacy Windows XP systems, network segmentation between OT and office environments, and cybersecurity constraints specific to operational technology.</li>
+            <li>Supported IT systems used to monitor and operate power distribution, contributing to high-availability expectations in critical public infrastructure.</li>
+            <li>Assisted with server operations and system administration tasks including service checks, log review, access basics, and operational documentation to improve reliability and troubleshooting speed.</li>
+            <li>Gained hands-on exposure to networking architecture for grid monitoring and control, focusing on redundancy and segmentation.</li>
           </ul>
         </div>
       </div>
 
-
+      <div class="exp-item reveal">
+        <div class="exp-date">Dec 2022 – Jan 2024</div>
+        <div class="exp-content">
+          <h3>Lead Designer (Former)</h3>
+          <div class="exp-org">Kilanos Studio · Remote, Finland</div>
+          <ul class="exp-bullets">
+            <li>Led visual design for multiple game projects, managing end-to-end delivery of UI and visual assets while keeping design consistent with project goals.</li>
+            <li>Collaborated across teams to resolve design issues during development, translating game mechanics and direction into shippable art and interface deliverables.</li>
+          </ul>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -881,7 +902,7 @@
         <div class="edu-date">Sep 2021 – Jun 2024</div>
         <div class="edu-content">
           <h3>SAMIS High School</h3>
-          <div class="edu-degree">Cognia-Accredited High School Diploma · Taif, Saudi Arabia</div>
+          <div class="edu-degree">High School Diploma</div>
           <div class="edu-note">GPA: 4.0 · Grade: 99.07/100</div>
         </div>
       </div>
@@ -1018,12 +1039,12 @@
       <div class="contact-text reveal">
         <h2>Let's talk.</h2>
         <p>Open to internship opportunities, engineering roles, and collaborations. Based in Tunis and available remotely or for relocation.</p>
-        <a href="/cdn-cgi/l/email-protection#1371726060726072757a53747e727a7f3d707c7e" class="btn btn-primary">Send an email</a>
+        <a href="mailto:bassasafi@gmail.com" class="btn btn-primary">Send an email</a>
       </div>
       <div class="contact-links reveal">
-        <a href="/cdn-cgi/l/email-protection#3a585b49495b495b5c537a5d575b535614595557" class="contact-link">
+        <a href="mailto:bassasafi@gmail.com" class="contact-link">
           <span class="contact-link-label">Email</span>
-          <span class="__cf_email__" data-cfemail="5735362424362436313e17303a363e3b7934383a">[email&#160;protected]</span>
+          bassasafi@gmail.com
         </a>
         <a href="https://github.com/Confused-Guy" target="_blank" rel="noopener" class="contact-link">
           <span class="contact-link-label">GitHub</span>
@@ -1045,7 +1066,7 @@
   </footer>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const cursor = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
   let mouseX = 0, mouseY = 0;
@@ -1128,4 +1149,14 @@
 
     eye.innerHTML = `
       <svg viewBox="0 0 100 50" fill="none">
-        <path d="M5 25 Q30
+        <path d="M5 25 Q30 5, 50 5 Q70 5, 95 25 Q70 45, 50 45 Q30 45, 5 25Z" fill="${color}" stroke="${pupilColor}" stroke-width="1.5"/>
+        <circle cx="50" cy="25" r="14" fill="${pupilColor}" class="eye-pupil"/>
+        <circle cx="50" cy="25" r="6" fill="${color}"/>
+      </svg>
+    `;
+    eyesBg.appendChild(eye);
+  }
+</script>
+
+</body>
+</html>
