@@ -1142,7 +1142,7 @@
   try {
     const res = await fetch('https://mirror.safiabidi.com/stats.json', { cache: 'no-store' });
     const d = await res.json();
-    const gb = b => b >= 1e9 ? (b/1e9).toFixed(1)+' GB' : (b/1e6).toFixed(0)+' MB';
+    const gb = b => b >= (1024**3) ? (b/(1024**3)).toFixed(1)+' GB' : (b/(1024**2)).toFixed(0)+' MB';
     const el = id => document.getElementById(id);
     if (el('portfolio-total-data')) el('portfolio-total-data').textContent = gb(d.total_bytes_served);
     if (el('portfolio-total-ips')) el('portfolio-total-ips').textContent = d.total_unique_ip_count.toLocaleString();
