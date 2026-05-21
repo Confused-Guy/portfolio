@@ -712,24 +712,24 @@
       <p>
         Tunisia's first and only public Arch Linux package mirror, serving North Africa. Built from scratch on a home server — rsync sync pipeline, automated systemd orchestration, live metrics dashboard, and full DNS/HTTPS setup. Served 70+ GB to 500+ unique IPs within the first two weeks with no official listing. Pending Arch Linux Tier 2 official listing.
       </p>
-      <div class="mirror-meta">
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Stack</span>
-          <span class="mirror-stat-value">rsync / systemd / NGINX</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Automation</span>
-          <span class="mirror-stat-value">Full</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Since</span>
-          <span class="mirror-stat-value">Dec 2025</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Status</span>
-          <span class="mirror-stat-value" style="color: #22c55e;">Active</span>
-        </div>
-      </div>
+        <div class="mirror-meta" id="mirror-meta">
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Stack</span>
+      <span class="mirror-stat-value">rsync / systemd / NGINX</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Total Data Served</span>
+      <span class="mirror-stat-value" id="portfolio-total-data">loading...</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Unique IPs</span>
+      <span class="mirror-stat-value" id="portfolio-total-ips">loading...</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Status</span>
+      <span class="mirror-stat-value" style="color: #22c55e;">Active</span>
+    </div>
+  </div>
       <div class="project-tags">
         <span class="tag tag-yellow">Arch Linux</span>
         <span class="tag tag-yellow">systemd</span>
@@ -1137,6 +1137,17 @@
     eyesBg.appendChild(eye);
   }
 </script>
-
+<script>
+(async () => {
+  try {
+    const res = await fetch('https://mirror.safiabidi.com/stats.json', { cache: 'no-store' });
+    const d = await res.json();
+    const gb = b => b >= 1e9 ? (b/1e9).toFixed(1)+' GB' : (b/1e6).toFixed(0)+' MB';
+    const el = id => document.getElementById(id);
+    if (el('portfolio-total-data')) el('portfolio-total-data').textContent = gb(d.total_bytes_served);
+    if (el('portfolio-total-ips')) el('portfolio-total-ips').textContent = d.total_unique_ip_count.toLocaleString();
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
