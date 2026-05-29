@@ -180,17 +180,19 @@
   }
 
   .hero h1 .personal-link:hover .safi-reveal {
+    background: var(--yellow);
+    border-radius: 3px;
+    margin: -4px -1px -4px -6px;
+    padding: 4px 1px 4px 6px;
+  }
+
+  .hero h1 .personal-link:hover .safi-eyes {
     color: transparent;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px rgba(0,0,0,0.4);
-    background:
-      url('media/its all in the eyes.png') center/120% no-repeat,
-      var(--yellow);
-    -webkit-background-clip: text, padding-box;
-    background-clip: text, padding-box;
-    margin: -4px -1px -4px -6px;
-    padding: 4px 1px 4px 6px;
-    border-radius: 3px;
+    background: url('media/its all in the eyes.png') center/120% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .personal-tooltip {
@@ -740,7 +742,7 @@
   <div class="personal-tooltip" id="personalTooltip">Click for the personal side of me</div>
   <div class="container">
     <div class="hero-prompt">init portfolio.v1</div>
-    <h1>Ahmed<br><a class="personal-link" href="personal.html"><span class="safi-reveal">Safi</span>errahman</a><br>Abidi.</h1>
+    <h1>Ahmed<br><a class="personal-link" href="personal.html"><span class="safi-reveal"><span class="safi-eyes">Safi</span></span>errahman</a><br>Abidi.</h1>
     <div class="hero-title">Computer Engineer · Tunis Metropolitan Area, Tunisia</div>
     <p class="hero-bio">
       Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company). I run an <strong>Official Arch Linux mirror</strong>. I build things that talk to each other.
