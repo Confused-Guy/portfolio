@@ -177,24 +177,19 @@
 
   .hero h1 .safi-reveal {
     display: inline-block;
-    position: relative;
   }
 
   .hero h1 .personal-link:hover .safi-reveal {
     color: transparent;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px rgba(0,0,0,0.4);
-    background: url('media/its all in the eyes.png') center/120% no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-
-  .hero h1 .personal-link:hover .safi-reveal::before {
-    content: '';
-    position: absolute;
-    inset: -4px -1px -4px -6px;
-    background: var(--yellow);
-    z-index: -1;
+    background:
+      url('media/its all in the eyes.png') center/120% no-repeat,
+      var(--yellow);
+    -webkit-background-clip: text, padding-box;
+    background-clip: text, padding-box;
+    margin: -4px -1px -4px -6px;
+    padding: 4px 1px 4px 6px;
     border-radius: 3px;
   }
 
