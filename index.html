@@ -689,7 +689,7 @@
     <h1>Ahmed<br><span>Safierrahman</span><br>Abidi.</h1>
     <div class="hero-title">Computer Engineer · Tunis Metropolitan Area, Tunisia</div>
     <p class="hero-bio">
-      Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company), and formerly Lead Designer at <strong>Kilanos Studio</strong>. I run a <strong>public Arch Linux mirror</strong> and have shipped games to itch.io. I build things that talk to each other.
+      Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company). I run a <strong>public Arch Linux mirror</strong> and have shipped games to itch.io. I build things that talk to each other.
     </p>
     <div class="hero-links">
       <a href="mailto:bassasafi@gmail.com" class="btn btn-primary">Get in touch</a>
@@ -707,29 +707,30 @@
   <div class="container">
     <div class="section-label reveal">01 / Infrastructure</div>
     <div class="mirror-card reveal">
+      <a href="https://archlinux.org/mirrors/safiabidi.com/" target="_blank" rel="noopener" class="card-link"></a>
       <div class="mirror-badge">Featured Project</div>
       <h3>Arch Linux Mirror</h3>
       <p>
-        A fully automated, publicly accessible Arch Linux package mirror designed, deployed, and maintained from Tunisia. Built with rsync, systemd services, and timers for reliable scheduled synchronization with upstream mirrors. Handles DNS configuration, reverse proxy readiness, and port forwarding. Every constraint, issue, and fix is documented on Git.
+        Tunisia's first and only public Arch Linux package mirror, serving North Africa. Officially listed on Arch Linux. Built from scratch on a home server — rsync sync pipeline, automated systemd orchestration, live metrics dashboard, and full DNS/HTTPS setup. Served 70+ GB to 500+ unique IPs within the first two weeks of going live.
       </p>
-      <div class="mirror-meta">
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Stack</span>
-          <span class="mirror-stat-value">rsync / systemd / NGINX</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Automation</span>
-          <span class="mirror-stat-value">Full</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Since</span>
-          <span class="mirror-stat-value">Dec 2025</span>
-        </div>
-        <div class="mirror-stat">
-          <span class="mirror-stat-label">Status</span>
-          <span class="mirror-stat-value" style="color: #22c55e;">Active</span>
-        </div>
-      </div>
+        <div class="mirror-meta" id="mirror-meta">
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Stack</span>
+      <span class="mirror-stat-value">rsync / systemd / NGINX</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Total Data Served</span>
+      <span class="mirror-stat-value" id="portfolio-total-data">loading...</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Unique IPs</span>
+      <span class="mirror-stat-value" id="portfolio-total-ips">loading...</span>
+    </div>
+    <div class="mirror-stat">
+      <span class="mirror-stat-label">Status</span>
+      <span class="mirror-stat-value" style="color: #22c55e;">Active</span>
+    </div>
+  </div>
       <div class="project-tags">
         <span class="tag tag-yellow">Arch Linux</span>
         <span class="tag tag-yellow">systemd</span>
@@ -738,6 +739,11 @@
         <span class="tag">Automation</span>
         <span class="tag">Git</span>
         <span class="tag">Open Source</span>
+      </div>
+      <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+        <a href="https://mirror.safiabidi.com/dashboard" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:10px; padding:8px 16px;">Dashboard</a>
+        <a href="https://mirror.safiabidi.com" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size:10px; padding:8px 16px;">Mirror Index</a>
+        <a href="https://github.com/Confused-Guy/Arch_Mirror_Tunisia" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size:10px; padding:8px 16px;">Documentation</a>
       </div>
     </div>
   </div>
@@ -778,7 +784,19 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-number">03 / GAME</div>
+        <div class="project-number">03 / AI</div>
+        <h3>ASA</h3>
+        <p>An AI that learns how you work and writes its own instructions. Self-maintaining instruction layer for any AI coding tool. Sits in a .asa/ folder at your project root — loads relevant rules per session and writes new ones when it learns something worth keeping. No setup. No manual rule management.</p>
+        <div class="project-tags">
+          <span class="tag tag-yellow">AI</span>
+          <span class="tag tag-yellow">Prompt Engineering</span>
+          <span class="tag">Automation</span>
+        </div>
+        <a href="https://github.com/Confused-Guy/ASA" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">04 / GAME</div>
         <h3>Lethal Prescription</h3>
         <p>2D platformer built in C on Debian Linux. Time-based game loop with input handling, update, and render steps for responsive gameplay. Ported to Windows and published on itch.io.</p>
         <div class="project-tags">
@@ -791,7 +809,7 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-number">04 / WEB</div>
+        <div class="project-number">05 / WEB</div>
         <h3>Starr</h3>
         <p>Full-stack educational web platform for quizzes, messaging, and safe interaction for children. Built with a team of 6. Features include a points and badges reward system, role-based access, and content moderation tools.</p>
         <div class="project-tags">
@@ -806,7 +824,7 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-number">05 / WEB</div>
+        <div class="project-number">06 / WEB</div>
         <h3>Smart Research</h3>
         <p>Publication management system for academic research. A platform to organize, track, and manage academic publications and citations. Currently in development.</p>
         <div class="project-tags">
@@ -820,7 +838,7 @@
       </div>
 
       <div class="project-card reveal">
-        <div class="project-number">06 / CREATIVE</div>
+        <div class="project-number">07 / CREATIVE</div>
         <h3>Waves</h3>
         <p>An ongoing autobiographical project. A jumble of dysfunctional thoughts rendered in writing and video. The long game. Not yet public.</p>
         <div class="project-tags">
@@ -1132,6 +1150,17 @@
     eyesBg.appendChild(eye);
   }
 </script>
-
+<script>
+(async () => {
+  try {
+    const res = await fetch('https://mirror.safiabidi.com/stats.json', { cache: 'no-store' });
+    const d = await res.json();
+    const gb = b => b >= (1024**3) ? (b/(1024**3)).toFixed(1)+' GB' : (b/(1024**2)).toFixed(0)+' MB';
+    const el = id => document.getElementById(id);
+    if (el('portfolio-total-data')) el('portfolio-total-data').textContent = gb(d.total_bytes_served);
+    if (el('portfolio-total-ips')) el('portfolio-total-ips').textContent = d.total_unique_ip_count.toLocaleString();
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
