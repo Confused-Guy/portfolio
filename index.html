@@ -167,7 +167,56 @@
     animation: fadeUp 0.6s 0.35s forwards;
   }
 
-  .hero h1 span { color: var(--yellow); }
+  .hero h1 .personal-link {
+    color: var(--yellow);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .hero h1 .safi-reveal {
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero h1 .personal-link:hover .safi-reveal {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px rgba(0,0,0,0.4);
+    background: url('media/its all in the eyes.png') center/120% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .hero h1 .personal-link:hover .safi-reveal::before {
+    content: '';
+    position: absolute;
+    inset: -4px -1px -4px -6px;
+    background: var(--yellow);
+    z-index: -1;
+    border-radius: 3px;
+  }
+
+  .personal-tooltip {
+    position: fixed;
+    pointer-events: none;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(0,0,0,0.85);
+    border: 1px solid var(--yellow);
+    padding: 6px 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1000;
+  }
+
+  .personal-tooltip.visible {
+    opacity: 1;
+  }
 
   .hero-title {
     font-size: 12px;
@@ -647,6 +696,12 @@
     z-index: 1;
   }
 
+  .mirror-card .btn,
+  .project-card .btn {
+    position: relative;
+    z-index: 2;
+  }
+
   .repo-link:hover { color: var(--yellow); }
 
   .repo-arrow {
@@ -687,9 +742,10 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="personal-tooltip" id="personalTooltip">Click for the personal side of me</div>
   <div class="container">
     <div class="hero-prompt">init portfolio.v1</div>
-    <h1>Ahmed<br><span>Safierrahman</span><br>Abidi.</h1>
+    <h1>Ahmed<br><a class="personal-link" href="personal.html"><span class="safi-reveal">Safi</span>errahman</a><br>Abidi.</h1>
     <div class="hero-title">Computer Engineer · Tunis Metropolitan Area, Tunisia</div>
     <p class="hero-bio">
       Systems thinker with broad technical exposure. <strong>Linux-native</strong>, infrastructure-minded, and comfortable across the stack. Studying Computer Engineering at <strong>ESPRIT</strong>, completed internship at <strong>STEG</strong> (Tunisia's national energy company). I run an <strong>Official Arch Linux mirror</strong>. I build things that talk to each other.
@@ -1179,6 +1235,22 @@
     if (el('portfolio-total-data')) el('portfolio-total-data').textContent = gb(d.total_bytes_served);
     if (el('portfolio-total-ips')) el('portfolio-total-ips').textContent = d.total_unique_ip_count.toLocaleString();
   } catch(e) {}
+})();
+</script>
+<script>
+(function() {
+  var link = document.querySelector('.personal-link');
+  var tip = document.getElementById('personalTooltip');
+  if (!link || !tip) return;
+  link.addEventListener('mouseenter', function() { tip.classList.add('visible'); });
+  link.addEventListener('mouseleave', function() { tip.classList.remove('visible'); });
+  link.addEventListener('mousemove', function(e) {
+    var x = e.clientX + 12;
+    var y = e.clientY + 12;
+    if (x + tip.offsetWidth > window.innerWidth) x = e.clientX - tip.offsetWidth - 12;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  });
 })();
 </script>
 </body>
